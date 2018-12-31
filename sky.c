@@ -8,6 +8,7 @@
 // XXX: http://poj.org/problem?id=3904
 // XXX: https://blog.csdn.net/Danliwoo/article/details/48933157
 // XXX: https://github.com/tainzhi/acm/blob/master/poj/3904.c
+
 #if 1
 #define _GNU_SOURCE
 #include <stdio.h>
