@@ -488,11 +488,11 @@ CACA_COMUN_FUNC_STATICA natural caca_comun_mcd(natural a, natural b) {
 
 #if 1
 
-#define PRIMOS_CACA_MAX ((int)1E4)
+#define PRIMOS_NUM_MAX ((int)1E4)
 
-natural primos_caca[PRIMOS_CACA_MAX + 1] = { 0 };
+natural primos_caca[PRIMOS_NUM_MAX + 1] = { 0 };
 natural primos_caca_tam = 0;
-bool primos_caca_es_primo[PRIMOS_CACA_MAX + 1] = { 0 };
+bool primos_caca_es_primo[PRIMOS_NUM_MAX + 1] = { 0 };
 typedef void (*primos_caca_primo_encontrado_cb)(natural primo,
 		natural idx_primo, void *cb_ctx);
 typedef void (*primos_caca_compuesto_encontrado_cb)(natural primo,
@@ -511,7 +511,7 @@ CACA_COMUN_FUNC_STATICA natural primos_caca_criba(natural limite,
 		primos_caca_no_divisible_encontrado_cb no_divisible_encontrado_cb,
 		void *cb_ctx) {
 	caca_log_debug("primos asta %u", limite);
-	assert_timeout(limite<=PRIMOS_CACA_MAX);
+	assert_timeout(limite<=PRIMOS_NUM_MAX);
 	natural i, j;
 	for (i = 2; i <= limite; i++) {
 		primos_caca_es_primo[i] = verdadero;
@@ -547,9 +547,9 @@ CACA_COMUN_FUNC_STATICA natural primos_caca_criba(natural limite,
 #endif
 
 #if 1
-#define MORBIUS_MAX_MIERDA PRIMOS_CACA_MAX
+#define MORBIUS_MAX PRIMOS_NUM_MAX
 
-int morbius[MORBIUS_MAX_MIERDA + 1] = { [1]=1 };
+int morbius[MORBIUS_MAX + 1] = { [1]=1 };
 
 typedef struct morbius_datos {
 	int *morbius;
@@ -579,7 +579,7 @@ void morbius_primo_encontrado_cb(natural primo, natural idx_primo, void *cb_ctx)
 }
 #endif
 
-#define SKY_MAX_NUM MORBIUS_MAX_MIERDA
+#define SKY_MAX_NUM MORBIUS_MAX
 
 CACA_COMUN_FUNC_STATICA entero_largo sky_combinaciones(entero_largo n) {
 	return n * (n - 1) * (n - 2) * (n - 3) / 24;
@@ -638,7 +638,7 @@ CACA_COMUN_FUNC_STATICA void sky_main() {
 	natural *nums = calloc(SKY_MAX_NUM, sizeof(natural));
 	assert_timeout(nums);
 	m->morbius = morbius;
-	primos_caca_criba(MORBIUS_MAX_MIERDA, morbius_primo_encontrado_cb, NULL,
+	primos_caca_criba(MORBIUS_MAX, morbius_primo_encontrado_cb, NULL,
 			morbius_divisible_encontrado_cb, morbius_no_divisible_encontrado_cb,
 			m);
 
